@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7dmesnr7q4f8"]
+[gd_scene load_steps=8 format=3 uid="uid://b7dmesnr7q4f8"]
 
 [ext_resource type="PackedScene" uid="uid://d0uwdoay2w0v8" path="res://scenes/maps/wall.tscn" id="1_rbas3"]
 [ext_resource type="PackedScene" uid="uid://dwyrsetsg206e" path="res://scenes/bubble/bubble.tscn" id="2_oril1"]
+[ext_resource type="PackedScene" uid="uid://dw4c7wbif2h7j" path="res://scenes/player.tscn" id="3_3x8uf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4ha3p"]
 friction = 0.0
@@ -45,11 +46,6 @@ shape = SubResource("BoxShape3D_0jpve")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.258819, 0.965926, 0, -0.965926, -0.258819, 0, 3.1774, 7.35116)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.10635, 0)
-current = true
-fov = 95.0
-
 [node name="Bubble" parent="." instance=ExtResource("2_oril1")]
 
 [node name="Bubble2" parent="." instance=ExtResource("2_oril1")]
@@ -66,3 +62,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.647014, 0.155902, 0)
 
 [node name="Bubble6" parent="." instance=ExtResource("2_oril1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.155902, 1.02271)
+
+[node name="Player" parent="." instance=ExtResource("3_3x8uf")]

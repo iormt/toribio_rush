@@ -22,7 +22,7 @@ func get_random_direction() -> Vector3:
 		0.0, 
 		randf_range(-1.0, 1.0)
 	).normalized()
-	print("random direction: ", random_direction)
+	#print("random direction: ", random_direction)
 	return random_direction
 
 
