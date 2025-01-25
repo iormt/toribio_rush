@@ -52,7 +52,10 @@ func change_state(newState : STATE):
 		STATE.THRUSTING:
 			animationPlayer.play("attack")
 			thrustDuration = thrustMinDuration + (thrustMaxDuration - thrustMinDuration) * curve.sample(previousStateTime / chargeDelay)
+			
 			pass
+
+
 
 func _calculate_rotation_by_state():
 	if currentState == STATE.WALKING:
@@ -81,7 +84,7 @@ func _update_rotation():
 	
 	self.global_rotate(Vector3.UP, rotateAmount * mult)
 	pass
-
+	
 func _is_full_charging() -> bool :
 	return currentStateTime >= chargeDelay
 
@@ -112,16 +115,21 @@ func _update_charge_state_and_speed():
 			
 		if not Input.is_action_pressed("front"):
 			change_state(STATE.THRUSTING)
+			
 	elif currentState == STATE.THRUSTING:
+		
 		if currentStateTime >= thrustDuration:
 			change_state(STATE.WALKING)
 		pass
+		
+		
+		
 func _process(_delta):
 	currentStateTime += _delta
 	_update_charge_state_and_speed()
 	_update_rotation()
 	
-	print("state: ", currentState, " currentTime: ", currentStateTime, " currentSpeed: ", currentSpeed)
+	#print("state: ", currentState, " currentTime: ", currentStateTime, " currentSpeed: ", currentSpeed)
 	
 	#if Input.is_action_just_pressed("camera_shake") :
 		#camera.apply_preset_shake(0)
@@ -134,3 +142,8 @@ func _physics_process(_delta):
 	#self.position = to_global(targetPosition)
 	
 	
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body.is_in_group("bubbles") and currentState == STATE.THRUSTING:
+		print("collision happendedddededeed")
+		
