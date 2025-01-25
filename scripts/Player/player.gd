@@ -20,6 +20,8 @@ var currentState : STATE
 var currentSpeed : float
 
 var thrustDuration : float
+var thrustStartingSpeed : float
+var thrustStartingDirection : Vector3
 
 var target_rotation = Vector3();
 var target_velocity = Vector3.ZERO
@@ -50,12 +52,11 @@ func change_state(newState : STATE):
 			animationPlayer.play("run")
 			pass
 		STATE.THRUSTING:
+			thrustStartingSpeed = currentSpeed
+			thrustStartingDirection = _get_direction()
 			animationPlayer.play("attack")
 			thrustDuration = thrustMinDuration + (thrustMaxDuration - thrustMinDuration) * curve.sample(previousStateTime / chargeDelay)
-			
 			pass
-
-
 
 func _calculate_rotation_by_state():
 	if currentState == STATE.WALKING:
@@ -66,7 +67,7 @@ func _calculate_rotation_by_state():
 		else:
 			return freeRotation + (limitedRotation - freeRotation) * curve.sample(currentStateTime/chargeDelay)
 	elif currentState == STATE.THRUSTING:
-		return limitedRotation
+		return freeRotation
 	pass
 
 func _update_rotation():
@@ -84,13 +85,21 @@ func _update_rotation():
 	
 	self.global_rotate(Vector3.UP, rotateAmount * mult)
 	pass
-	
+
 func _is_full_charging() -> bool :
 	return currentStateTime >= chargeDelay
 
-func _move_forward() :
+func _get_direction() -> Vector3 :
 	var aim = get_global_transform().basis
-	var dir = aim.x
+	return aim.x
+	
+func _move_forward(_delta) :
+	
+	var dir = _get_direction()
+	
+	#if currentState == STATE.THRUSTING:
+		#dir = lerp(thrustStartingDirection, dir, thrustDuration / currentStateTime)
+		#pass
 	#dir.y = 0.
 	#dir = dir.normalized()
 	#apply_central_force(dir * currentSpeed)
@@ -98,7 +107,9 @@ func _move_forward() :
 	target_velocity.z = dir.z * currentSpeed
 	
 	velocity = target_velocity
-	move_and_slide()
+	var kinematicCollision3D : KinematicCollision3D = move_and_collide(target_velocity * _delta)
+	
+	#if (kinematicCollision3D.)
 	
 	pass
 
@@ -115,15 +126,12 @@ func _update_charge_state_and_speed():
 			
 		if not Input.is_action_pressed("front"):
 			change_state(STATE.THRUSTING)
-			
 	elif currentState == STATE.THRUSTING:
-		
 		if currentStateTime >= thrustDuration:
 			change_state(STATE.WALKING)
+		else:
+			currentSpeed = thrustStartingSpeed + (baseSpeed - thrustStartingSpeed) * (currentStateTime/chargeDelay)
 		pass
-		
-		
-		
 func _process(_delta):
 	currentStateTime += _delta
 	_update_charge_state_and_speed()
@@ -136,14 +144,9 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	
-	_move_forward()
+	_move_forward(_delta)
 	
 	#var targetPosition = to_local(self.global_position) + Vector3(0, 0, currentSpeed)
 	#self.position = to_global(targetPosition)
 	
 	
-
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.is_in_group("bubbles") and currentState == STATE.THRUSTING:
-		print("collision happendedddededeed")
-		
