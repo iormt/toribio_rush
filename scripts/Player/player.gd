@@ -150,3 +150,9 @@ func _physics_process(_delta):
 	#self.position = to_global(targetPosition)
 	
 	
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body.is_in_group("bubbles") and currentState == STATE.THRUSTING:
+		
+		print(self.rotation)
