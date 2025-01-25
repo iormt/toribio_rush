@@ -40,9 +40,13 @@ func change_state(newState : STATE):
 	
 	match currentState:
 		STATE.WALKING:
+			animationPlayer.speed_scale = 1 #setea velocidad de animación
+			animationPlayer.get_animation("walk").loop_mode = (Animation.LOOP_LINEAR) #pone animación en loop
 			animationPlayer.play("walk")
 			currentSpeed = baseSpeed
 		STATE.CHARGING:
+			#la velocidad de animación se ajusta en _update_charge_state_and_speed()
+			animationPlayer.get_animation("run").loop_mode = (Animation.LOOP_LINEAR) #pone animacion en loop
 			animationPlayer.play("run")
 			pass
 		STATE.THRUSTING:
@@ -104,6 +108,7 @@ func _update_charge_state_and_speed():
 			currentSpeed = maxSpeed
 		else:
 			currentSpeed = baseSpeed + (maxSpeed - baseSpeed) * curve.sample(currentStateTime/chargeDelay)
+			animationPlayer.speed_scale = currentSpeed #acelera animación
 			
 		if not Input.is_action_pressed("front"):
 			change_state(STATE.THRUSTING)
