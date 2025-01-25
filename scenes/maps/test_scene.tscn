@@ -20,22 +20,22 @@ size = Vector3(10.0137, 0.001, 10.0029)
 [node name="Map" type="Node3D" parent="."]
 
 [node name="Wall" parent="Map" instance=ExtResource("1_rbas3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51741, 0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.03217, 0.25, 0)
 
 [node name="Wall2" parent="Map" instance=ExtResource("1_rbas3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.511, 0.25, -0.004)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.00973, 0.25, -0.004)
 
 [node name="Wall3" parent="Map" instance=ExtResource("1_rbas3")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.004, 0.25, -2.51642)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.004, 0.25, -5.0208)
 
 [node name="Wall4" parent="Map" instance=ExtResource("1_rbas3")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.002, 0.25, 2.51123)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.002, 0.25, 5)
 
 [node name="Floor" type="StaticBody3D" parent="Map"]
 physics_material_override = SubResource("PhysicsMaterial_4ha3p")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Floor"]
-transform = Transform3D(5, 0, 0, 0, -2.18557e-07, 1, 0, -5, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(10, 0, 0, 0, -4.37114e-07, 1, 0, -10, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("QuadMesh_d4moy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Floor"]
@@ -43,10 +43,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00100002, 0)
 shape = SubResource("BoxShape3D_0jpve")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 3.1774, 7.35116)
+transform = Transform3D(1, 0, 0, 0, -0.258819, 0.965926, 0, -0.965926, -0.258819, 0, 3.1774, 7.35116)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.99235, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.10635, 0)
 current = true
 fov = 95.0
 
