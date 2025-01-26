@@ -2,15 +2,18 @@ extends RigidBody3D
 class_name Bubble
 
 @export var speed : float = 250.0
-@export var hitMultiplier = 50;
+@export var hit_multiplier : float = 50
 var bubble_direction : Vector3
-@onready var pop_sound_array = [$pop_sounds/pop_sound_1, $pop_sounds/pop_sound_2, $pop_sounds/pop_sound_3, $pop_sounds/pop_sound_4, $pop_sounds/pop_sound_5]
+@onready var pop_sound_array = [$pop_sounds/pop_sound_1, 
+						$pop_sounds/pop_sound_2, 
+						$pop_sounds/pop_sound_3, 
+						$pop_sounds/pop_sound_4, 
+						$pop_sounds/pop_sound_5,
+	]
 var pop_to_play : AudioStreamPlayer3D
 
 enum BubbleStatesEnum {
 		WONDER,
-		FLEE,
-		IDLE,
 	}
 
 var is_active : bool = true
@@ -40,8 +43,7 @@ func _calculate_hit_force(value : float, pos : Vector3, direction : Vector3, isT
 	dir.y = 0
 	dir.normalized()
 	var dot = dir.dot(direction)
-	
-	return (dir) * dot * value * hitMultiplier * (5 if isThrusting else 1) + Vector3(0,30,0) #le sumo un vector con fuerza vertical porque siempre daba 0 en Y. Solo para probar
+	return (dir) * dot * value * hit_multiplier * (5 if isThrusting else 1)
 
 
 func get_hit(value : float, pos : Vector3, direction : Vector3, isThrusting : bool) -> void:
@@ -51,7 +53,7 @@ func get_hit(value : float, pos : Vector3, direction : Vector3, isThrusting : bo
 	#print("force: ", force, "value: ", value)
 	
 	#hice lo posible para elegir un sonido random y darle play
-	pop_to_play = pop_sound_array.pick_random() 
-	pop_to_play.play()
+	#pop_to_play = pop_sound_array.pick_random() 
+	#pop_to_play.play()
 	#$pop_sounds/pop_sound_4.play()
 	apply_impulse(force)

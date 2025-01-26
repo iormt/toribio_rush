@@ -5,6 +5,7 @@ var bubble_direction : Vector3
 
 var timer : Timer
 
+
 func enter_state(bubble_ref : Bubble) -> void:
 	print("Entered Wonder State")
 	super(bubble_ref)
@@ -46,4 +47,3 @@ func set_bubble_direction() -> void:
 func on_timer_timeout() -> void:
 	set_bubble_direction()
 	timer.start(randf_range(0.5, 1.5))
-	
