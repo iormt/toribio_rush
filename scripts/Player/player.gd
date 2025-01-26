@@ -33,10 +33,14 @@ var target_velocity = Vector3.ZERO
 var lastRotationDegrees : float
 
 @onready var camera : Camera3D = $Camera3D
+@onready var loop_manager = $/root/LoopManager
+
 
 func _ready() -> void:
 	change_state(STATE.WALKING)
-
+	
+	
+	
 func change_state(newState : STATE):
 	if currentState == newState:
 		pass
@@ -107,6 +111,7 @@ func _move_forward(_delta) :
 	
 	pass
 
+
 func _update_charge_state_and_speed():
 	if currentState == STATE.WALKING:
 		if Input.is_action_pressed("front"):
@@ -128,10 +133,12 @@ func _update_charge_state_and_speed():
 		else:
 			currentSpeed = thrustStartingSpeed + (baseSpeed - thrustStartingSpeed) * (currentStateTime/chargeDelay)
 		pass
+		
 func _process(_delta):
 	currentStateTime += _delta
 	_update_charge_state_and_speed()
 	_move_camera(_delta)
+	
 	
 	#print("state: ", currentState, " currentTime: ", currentStateTime, " currentSpeed: ", currentSpeed)
 	

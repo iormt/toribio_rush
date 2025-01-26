@@ -58,6 +58,7 @@ func get_hit(value : float, pos : Vector3, direction : Vector3, isThrusting : bo
 func burst_bubble() -> void:
 	pop_sound_array.pick_random().play()
 	var timer = get_tree().create_timer(TIME_TO_BURST)
+	
 	$CollisionShape3D.disabled = true
 	visible = false
 	timer.connect('timeout', queue_free)

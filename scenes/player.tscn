@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=4 uid="uid://dw4c7wbif2h7j"]
 
 [ext_resource type="Script" path="res://scripts/Player/player.gd" id="1_ot0h5"]
-[ext_resource type="PackedScene" uid="uid://g78xt3mtyof5" path="res://models/Toro/SK_bull_animations_single.fbx" id="2_4784c"]
+[ext_resource type="PackedScene" uid="uid://crq2g2b3gl80e" path="res://models/Toro/SK_bull_animations_single.fbx" id="2_4784c"]
 
 [sub_resource type="Curve" id="Curve_2wgeg"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 3.005, 0.0, 0, 0]
@@ -174,52 +174,6 @@ shape = SubResource("SeparationRayShape3D_u6s1q")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0134736, 0.171074, 0.00904083)
 shape = SubResource("BoxShape3D_wxpce")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
-custom_minimum_size = Vector2(3.205, 0)
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(257, 57)
-render_target_update_mode = 4
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/SubViewportContainer/SubViewport"]
-custom_minimum_size = Vector2(500, 0)
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 510.0
-offset_bottom = 125.0
-scale = Vector2(1.01064, 1)
-pivot_offset = Vector2(10, 10)
-text = "Click and hold mouse to give
-direction and speed to the bull"
-fit_content = true
-
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="CanvasLayer"]
-custom_minimum_size = Vector2(3.205, 0)
-offset_left = 500.0
-offset_right = 757.0
-offset_bottom = 57.0
-
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer2"]
-handle_input_locally = false
-size = Vector2i(257, 57)
-render_target_update_mode = 4
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/SubViewportContainer2/SubViewport"]
-custom_minimum_size = Vector2(500, 0)
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 510.0
-offset_bottom = 125.0
-scale = Vector2(1.01064, 1)
-pivot_offset = Vector2(10, 10)
-text = "Points"
-fit_content = true
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 
