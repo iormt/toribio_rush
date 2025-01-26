@@ -15,6 +15,10 @@ run/main_scene="res://scenes/maps/test_scene.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+LoopManager="*res://loop_manager.gd"
+
 [input]
 
 front={
