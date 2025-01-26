@@ -1,9 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwyrsetsg206e"]
+[gd_scene load_steps=16 format=3 uid="uid://dwyrsetsg206e"]
 
 [ext_resource type="Script" path="res://scripts/bubble/bubble.gd" id="1_diqwf"]
 [ext_resource type="PackedScene" uid="uid://cyg5hov36xemo" path="res://models/people/SK_Character_Dummy_Female_01.fbx" id="2_ksaka"]
 [ext_resource type="Script" path="res://scripts/bubble/states/wonder_state.gd" id="2_xq7pr"]
 [ext_resource type="PackedScene" uid="uid://bc83urbuh4sdd" path="res://models/people/FixedScale/SM_Chr_Attach_Female_Hair_01.fbx" id="3_xht7v"]
+[ext_resource type="AudioStream" uid="uid://blmwhkyo5nou0" path="res://sounds/baloon pop/S_balloon-pop_00.mp3" id="5_aopbt"]
+[ext_resource type="AudioStream" uid="uid://bg6n55lm4rhwx" path="res://sounds/baloon pop/S_balloon-pop_01.mp3" id="6_dnqdn"]
+[ext_resource type="AudioStream" uid="uid://cxp5xd3ayxnsl" path="res://sounds/baloon pop/S_balloon-pop_02.mp3" id="7_jvqgd"]
+[ext_resource type="AudioStream" uid="uid://opuiplqab3wq" path="res://sounds/baloon pop/S_balloon-pop_03.mp3" id="8_o3kdq"]
+[ext_resource type="AudioStream" uid="uid://bopk8iudofml7" path="res://sounds/baloon pop/S_balloon-pop_04.mp3" id="9_te0ua"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_05s0o"]
 friction = 0.5
@@ -63,6 +68,33 @@ shape = SubResource("CylinderShape3D_hrkoi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallDetector"]
 shape = SubResource("CylinderShape3D_6oh52")
+
+[node name="pop_sounds" type="Node3D" parent="."]
+
+[node name="pop_sound_1" type="AudioStreamPlayer3D" parent="pop_sounds"]
+stream = ExtResource("5_aopbt")
+volume_db = -0.945
+max_db = -0.365
+
+[node name="pop_sound_2" type="AudioStreamPlayer3D" parent="pop_sounds"]
+stream = ExtResource("6_dnqdn")
+volume_db = -0.945
+max_db = -0.365
+
+[node name="pop_sound_3" type="AudioStreamPlayer3D" parent="pop_sounds"]
+stream = ExtResource("7_jvqgd")
+volume_db = -0.945
+max_db = -0.365
+
+[node name="pop_sound_4" type="AudioStreamPlayer3D" parent="pop_sounds"]
+stream = ExtResource("8_o3kdq")
+volume_db = -0.945
+max_db = -0.365
+
+[node name="pop_sound_5" type="AudioStreamPlayer3D" parent="pop_sounds"]
+stream = ExtResource("9_te0ua")
+volume_db = -0.945
+max_db = -0.365
 
 [connection signal="body_entered" from="BullDetector" to="." method="_on_bull_detector_body_entered"]
 [connection signal="body_entered" from="WallDetector" to="." method="_on_wall_detector_body_entered"]
