@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dw4c7wbif2h7j"]
+[gd_scene load_steps=8 format=3 uid="uid://dw4c7wbif2h7j"]
 
 [ext_resource type="Script" path="res://scripts/Player/player.gd" id="1_ot0h5"]
 [ext_resource type="PackedScene" uid="uid://crq2g2b3gl80e" path="res://models/Toro/SK_bull_animations_single.fbx" id="2_4784c"]
@@ -11,7 +11,13 @@ point_count = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8osco"]
 margin = 3.007
-size = Vector3(0.356404, 0.20372, 0.146729)
+size = Vector3(0.357691, 0.20372, 0.146729)
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_u6s1q"]
+length = 14.318
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wxpce"]
+size = Vector3(0.589294, 0.328186, 0.254532)
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("animationPlayer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.31015, 0.0890185, 0)
@@ -25,7 +31,7 @@ limitedRotation = 0.1
 animationPlayer = NodePath("SK_bull_animations_single/AnimationPlayer")
 
 [node name="SK_bull_animations_single" parent="." instance=ExtResource("2_4784c")]
-transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0, 0, 0)
+transform = Transform3D(-2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 0, 0, 0)
 
 [node name="_Joints" parent="SK_bull_animations_single" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, -4.37114e-08, 0, 4.37114e-08, 1, 0, 0, 0.0587339)
@@ -92,34 +98,33 @@ bone_idx = 17
 [node name="head container" type="Node3D" parent="SK_bull_animations_single/_Joints/Skeleton3D/BoneAttachment3D"]
 transform = Transform3D(1, 1.11759e-08, -4.65661e-10, 0, 1, -7.567e-09, -4.65661e-10, 6.69388e-09, 1, -0.00204344, 0.0348257, -0.00361779)
 
-[node name="Area3D" type="Area3D" parent="SK_bull_animations_single/_Joints/Skeleton3D/BoneAttachment3D/head container"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(-0.666253, 11.1891, -4.28492, 0.202778, -4.2804, -11.2088, -11.9798, -0.694732, 0.0485769, 0.521939, 0.134604, -0.00317925)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SK_bull_animations_single/_Joints/Skeleton3D/BoneAttachment3D/head container/Area3D"]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, -5.82077e-09, -2.54659e-09, 5.82077e-09, 1, 4.17913e-08, 2.54659e-09, -4.17913e-08, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_51yf3")
 disabled = true
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="SK_bull_animations_single/_Joints/Skeleton3D/BoneAttachment3D/head container/Area3D"]
-transform = Transform3D(-0.00925352, 0.00281637, -0.166386, 0.155404, -0.05945, -0.00964906, -0.0595129, -0.155678, 0.000674685, 0.00273148, -0.0387411, 0.00909968)
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(-0.0092536, 0.00281637, -0.166386, 0.155404, -0.0594501, -0.00964913, -0.0595129, -0.155678, 0.000674693, 0.00272553, -0.0386411, 0.0090614)
 shape = SubResource("BoxShape3D_8osco")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0.289466, -0.957188, 0, 0.957188, 0.289466, 1, 1.2653e-08, -4.184e-08, -0.349235, 0.410035, 1.43534e-09)
+transform = Transform3D(-4.37114e-08, 0.289466, -0.957188, 0, 0.957188, 0.289466, 1, 1.2653e-08, -4.184e-08, -1.30194, 0.781713, -0.0347767)
 current = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
-transform = Transform3D(-1.31134e-07, 0.867096, 2.87196, 0, 2.87196, -0.867096, -3, -3.79021e-08, -1.25537e-07, -0.362949, 0.316737, 3.55271e-14)
-spring_length = 0.305
+transform = Transform3D(-4.37114e-08, 0.289032, 0.957319, 0, 0.957319, -0.289032, -1, -1.2634e-08, -4.18458e-08, -0.214852, 0.312802, 0)
+shape = SubResource("SeparationRayShape3D_u6s1q")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.252721, 0.0630286, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-3.33127e-05, 0.000559454, -0.000214246, 1.01389e-05, -0.00021402, -0.000560439, -0.000598989, -3.47366e-05, 2.42885e-06, 0.260969, 0.0673019, -0.00158963)
-shape = SubResource("CapsuleShape3D_51yf3")
-disabled = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0362854, 0.164215, 0.00904083)
+shape = SubResource("BoxShape3D_wxpce")
 
-[connection signal="body_entered" from="SK_bull_animations_single/_Joints/Skeleton3D/BoneAttachment3D/head container/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 
 [editable path="SK_bull_animations_single"]
