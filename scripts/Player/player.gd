@@ -3,8 +3,8 @@ extends CharacterBody3D
 
 enum STATE { WALKING, CHARGING, THRUSTING}
 
-const CAMERA_ROTATION_THRESHOLD = 10
-const CAMERA_ROTATION_MAX_SPEED_THRESHOLD = 20
+const CAMERA_ROTATION_THRESHOLD = 0.1
+const CAMERA_ROTATION_MAX_SPEED_THRESHOLD = 0.3
 
 @export var baseSpeed : float = 1
 @export var maxSpeed : float = 10
@@ -80,22 +80,6 @@ func _calculate_rotation_by_state():
 		return freeRotation
 	pass
 
-func _update_rotation():
-	var mult
-	
-	if Input.is_action_pressed("left"):
-		mult = 1
-		pass
-	elif Input.is_action_pressed("right"):
-		mult = -1
-	else:
-		return
-		
-	#var rotateAmount = _calculate_rotation_by_state()
-	
-	#self.global_rotate(Vector3.UP, rotateAmount * mult)
-	pass
-
 func _is_full_charging() -> bool :
 	return currentStateTime >= chargeDelay
 
@@ -147,7 +131,7 @@ func _update_charge_state_and_speed():
 func _process(_delta):
 	currentStateTime += _delta
 	_update_charge_state_and_speed()
-	_update_rotation()
+	_move_camera(_delta)
 	
 	#print("state: ", currentState, " currentTime: ", currentStateTime, " currentSpeed: ", currentSpeed)
 	
@@ -155,19 +139,22 @@ func _process(_delta):
 		#camera.apply_preset_shake(0)
 
 func _move_camera(_delta):
-	var mouseX = get_viewport().get_mouse_position().x
-	#if (mouseX < -THRESHOLD):
-		
+	var viewport = get_viewport()
+	var mouseX : float = viewport.get_mouse_position().x - (viewport.size.x / 2.0)
+	
+	print("mouseX: ", mouseX, " threshold: ", CAMERA_ROTATION_THRESHOLD)
+	
+	if (mouseX > -CAMERA_ROTATION_THRESHOLD) and (mouseX < CAMERA_ROTATION_THRESHOLD):
+		return
+	
+	var rotateSpeed = _calculate_rotation_by_state()
+	
+	var mouseMult = (mouseX - CAMERA_ROTATION_THRESHOLD) / (CAMERA_ROTATION_MAX_SPEED_THRESHOLD - CAMERA_ROTATION_THRESHOLD)
+	mouseMult *= -1
+	self.global_rotate(Vector3.UP, rotateSpeed * mouseMult * _delta /10)
 	pass
 func _physics_process(_delta):
-	
-	_move_camera(_delta)
 	_move_forward(_delta)
-	
-	#var targetPosition = to_local(self.global_position) + Vector3(0, 0, currentSpeed)
-	#self.position = to_global(targetPosition)
-	
-	
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
@@ -178,32 +165,3 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 			pass
 		print(self.rotation)
 		
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		lastRotationDegrees += event.relative.x;
-		
-		print("lastRotationDegrees: ", lastRotationDegrees)
-		
-		if lastRotationDegrees < - CAMERA_ROTATION_THRESHOLD:
-			var rotationSpeed
-			if (lastRotationDegrees < - CAMERA_ROTATION_MAX_SPEED_THRESHOLD):
-				rotationSpeed = 1
-			else:
-				rotationSpeed = (lastRotationDegrees - CAMERA_ROTATION_THRESHOLD  / (CAMERA_ROTATION_MAX_SPEED_THRESHOLD - CAMERA_ROTATION_THRESHOLD))
-			#self.rotate_y(deg_to_rad(_calculate_rotation_by_state() * rotationSpeed))
-			pass
-		elif lastRotationDegrees > CAMERA_ROTATION_THRESHOLD:
-			var rotationSpeed
-			if (lastRotationDegrees > CAMERA_ROTATION_MAX_SPEED_THRESHOLD):
-				rotationSpeed = 1
-			else:
-				rotationSpeed = (lastRotationDegrees - CAMERA_ROTATION_THRESHOLD  / (CAMERA_ROTATION_MAX_SPEED_THRESHOLD - CAMERA_ROTATION_THRESHOLD))
-			#self.rotate_y(deg_to_rad(_calculate_rotation_by_state() * rotationSpeed))
-			pass
-		else:
-			return
-		#lastRotationDegrees += -event.relative.x * _calculate_rotation_by_state()
-		self.rotate_y(deg_to_rad(-event.screen_relative.x * 0.4))
-		print("time: ", currentStateTime, "relativeX: ", event.relative.x, "screen relative: ", event.screen_relative.x)
-		#self.rotate_x(deg_to_rad(-event.relative.y * mouse_sens))
-		#self.rotation.x = clamp(camera_3d.rotation.x, deg_to_rad(-90), deg_to_rad(90))
