@@ -35,7 +35,12 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="QuadMesh" id="QuadMesh_trnsj"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8g01y"]
+albedo_color = Color(1, 0.637333, 0.32, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_0omdi"]
+radius = 0.2
+height = 0.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4yfq4"]
 radius = 0.898626
@@ -129,24 +134,26 @@ bone_idx = 17
 [node name="head container" type="Node3D" parent="SK_bull_animations_single/_Joints/Skeleton3D/BoneAttachment3D"]
 transform = Transform3D(1, 1.11759e-08, -4.65661e-10, 0, 1, -7.567e-09, -4.65661e-10, 6.69388e-09, 1, -0.00204344, 0.0348257, -0.00361779)
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="SK_bull_animations_single"]
-transform = Transform3D(-8.74228e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.74228e-09, 0.00876637, 0.0199413, 0.0322096)
-amount = 3
+[node name="CPUParticles3D2" type="CPUParticles3D" parent="SK_bull_animations_single"]
+transform = Transform3D(3.14022e-09, -8.15883e-09, 0.2, -0.186652, -0.0718398, 0, 0.0718398, -0.186652, -8.74228e-09, 0.00903395, 0.00304129, 0.0495538)
+material_override = SubResource("StandardMaterial3D_8g01y")
+amount = 10
 lifetime = 0.5
-speed_scale = 0.5
-mesh = SubResource("QuadMesh_trnsj")
-spread = 25.71
-gravity = Vector3(-3, 1, 0)
-angular_velocity_min = -173.2
-angular_velocity_max = -25.7
-linear_accel_min = -25.64
-linear_accel_max = 18.3
-tangential_accel_min = -3.79
-tangential_accel_max = -3.79
-angle_min = -371.0
-angle_max = 436.9
-scale_amount_min = 0.01
-scale_amount_max = 0.01
+mesh = SubResource("SphereMesh_0omdi")
+particle_flag_rotate_y = true
+direction = Vector3(0.33, 1, 5.32)
+spread = 61.04
+flatness = 1.0
+gravity = Vector3(-2, 0.8, 0)
+initial_velocity_min = 0.23
+initial_velocity_max = 0.45
+angle_min = -474.8
+angle_max = -162.8
+scale_amount_min = 0.2
+scale_amount_max = 0.5
+color = Color(0.738585, 0.463148, 0, 1)
+hue_variation_min = -0.55
+hue_variation_max = 0.5
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.366537, 0.322217, 0)
