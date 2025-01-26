@@ -35,9 +35,10 @@ func set_state(new_state : BubbleState) ->void:
 func _calculate_hit_force(value : float, pos : Vector3, direction : Vector3, isThrusting : bool) -> Vector3:
 	var returnVector : Vector3
 	var dir = self.position - pos
+	dir.y = 0
 	dir.normalized()
 	var dot = dir.dot(direction)
-	return (dir + Vector3.UP) * dot * value * hitMultiplier * (2 if isThrusting else 1)
+	return (dir) * dot * value * hitMultiplier * (2 if isThrusting else 1)
 
 
 func get_hit(value : float, pos : Vector3, direction : Vector3, isThrusting : bool) -> void:
