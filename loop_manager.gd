@@ -1,11 +1,13 @@
 extends Node
 
 var timer = Timer.new()
-var current_points : int = 0
-var time_to_wait : int = 5
+var time_to_wait : int = 90
 var time_available : int
 var minutes : int
 var seconds : int
+
+var current_points : int = 0
+var total_point : int = 240
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,15 +19,26 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	update_timer()
+	on_all_bubbles_in()
 	print(current_points)
 	
 # ============	POINTS	================
-func change_current_points(point_delta:float):
+func change_current_points(point_delta:int):
 	current_points = current_points + point_delta
 
+func on_all_bubbles_in():
+	if current_points == total_point and time_available >= 1:
+		show_win_popup()
+		print("all bubbles in with time left")
 # ============	POINTS	================
 
-
+# ============	UI	================
+func show_win_popup():
+	pass
+	
+func show_loose_popup():
+	pass
+# ============	UI	================
 
 # ============	TIMER	================
 func start_timer():
@@ -44,5 +57,6 @@ func update_timer():
 func on_timer_end():
 	if time_available == 0:
 		timer.stop()
+		show_loose_popup()
 		print("no more time")
 # ============	TIMER	================
