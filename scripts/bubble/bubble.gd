@@ -1,6 +1,8 @@
 extends RigidBody3D
 class_name Bubble
 
+const TIME_TO_BURST = 0.5
+
 @export var speed : float = 250.0
 @export var hit_multiplier : float = 50
 var bubble_direction : Vector3
@@ -50,10 +52,12 @@ func get_hit(value : float, pos : Vector3, direction : Vector3, isThrusting : bo
 	if value > 0.2:
 		is_active = false
 	var force = _calculate_hit_force(value, pos, direction, isThrusting)
-	#print("force: ", force, "value: ", value)
-	
-	#hice lo posible para elegir un sonido random y darle play
-	#pop_to_play = pop_sound_array.pick_random() 
-	#pop_to_play.play()
-	#$pop_sounds/pop_sound_4.play()
 	apply_impulse(force)
+
+
+func burst_bubble() -> void:
+	pop_sound_array.pick_random().play()
+	var timer = get_tree().create_timer(TIME_TO_BURST)
+	$CollisionShape3D.disabled = true
+	visible = false
+	timer.connect('timeout', queue_free)

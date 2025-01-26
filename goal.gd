@@ -13,3 +13,4 @@ func _ready() -> void:
 func _on_goal_body_entered(body: Node3D) -> void:
 	if body.is_in_group("bubbles"):
 		LoopManager.change_current_points(score)
+		body.burst_bubble()

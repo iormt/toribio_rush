@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=4 uid="uid://dw4c7wbif2h7j"]
 
 [ext_resource type="Script" path="res://scripts/Player/player.gd" id="1_ot0h5"]
-[ext_resource type="PackedScene" uid="uid://crq2g2b3gl80e" path="res://models/Toro/SK_bull_animations_single.fbx" id="2_4784c"]
+[ext_resource type="PackedScene" uid="uid://g78xt3mtyof5" path="res://models/Toro/SK_bull_animations_single.fbx" id="2_4784c"]
 
 [sub_resource type="Curve" id="Curve_2wgeg"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 3.005, 0.0, 0, 0]
