@@ -7,7 +7,7 @@ extends Area3D
 
 
 func _ready() -> void:
-	$MeshInstance3D.get_active_material(0).albedo_color = color
+	$"../SM_arc_0".get_active_material(0).albedo_color = color
 
 
 func _on_body_entered(body: Node3D) -> void:

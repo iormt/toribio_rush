@@ -1,26 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm276wyjwk20y"]
+[gd_scene load_steps=5 format=3 uid="uid://cacae8oktqcw4"]
 
 [ext_resource type="Script" path="res://goal.gd" id="1_licdd"]
+[ext_resource type="PackedScene" uid="uid://cxuounru42cm8" path="res://models/props_trucos/SM_arco.FBX" id="2_sd32o"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6f2w"]
-transparency = 1
-albedo_color = Color(0.494118, 0.337255, 1, 0.686275)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_cjr5w"]
-material = SubResource("StandardMaterial3D_g6f2w")
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vgtdv"]
+data = PackedVector3Array(-0.5031, 1.2147, 0.25, -0.5031, 1.2147, -0.25, 0, 0, -0.25, 0, 0, -0.25, 0, 0, 0.25, -0.5031, 1.2147, 0.25, -1.646, 1.7035, 0.25, -1.646, 1.7035, -0.25, -0.5031, 1.2147, -0.25, -0.5031, 1.2147, -0.25, -0.5031, 1.2147, 0.25, -1.646, 1.7035, 0.25, -0.5031, -1.2147, 0.25, -0.5031, -1.2147, -0.25, -1.646, -1.7035, -0.25, -1.646, -1.7035, -0.25, -1.646, -1.7035, 0.25, -0.5031, -1.2147, 0.25, 0, 0, 0.25, 0, 0, -0.25, -0.5031, -1.2147, -0.25, -0.5031, -1.2147, -0.25, -0.5031, -1.2147, 0.25, 0, 0, 0.25, -0.1875, 0, -0.25, -0.6357, 1.0821, -0.25, -0.6357, 1.0821, 0.25, -0.6357, 1.0821, 0.25, -0.1875, 0, 0.25, -0.1875, 0, -0.25, -0.6357, 1.0821, -0.25, -1.7178, 1.5303, -0.25, -1.7178, 1.5303, 0.25, -1.7178, 1.5303, 0.25, -0.6357, 1.0821, 0.25, -0.6357, 1.0821, -0.25, -1.7178, -1.5303, -0.25, -0.6357, -1.0821, -0.25, -0.6357, -1.0821, 0.25, -0.6357, -1.0821, 0.25, -1.7178, -1.5303, 0.25, -1.7178, -1.5303, -0.25, -0.6357, -1.0821, -0.25, -0.1875, 0, -0.25, -0.1875, 0, 0.25, -0.1875, 0, 0.25, -0.6357, -1.0821, 0.25, -0.6357, -1.0821, -0.25, -0.6357, 1.0821, -0.25, -0.1875, 0, -0.25, 0, 0, -0.25, 0, 0, -0.25, -0.5031, 1.2147, -0.25, -0.6357, 1.0821, -0.25, -0.1875, 0, 0.25, -0.6357, 1.0821, 0.25, -0.5031, 1.2147, 0.25, -0.5031, 1.2147, 0.25, 0, 0, 0.25, -0.1875, 0, 0.25, -0.6357, 1.0821, -0.25, -0.5031, 1.2147, -0.25, -1.646, 1.7035, -0.25, -1.646, 1.7035, -0.25, -1.7178, 1.5303, -0.25, -0.6357, 1.0821, -0.25, -1.7178, 1.5303, 0.25, -1.7178, 1.5303, -0.25, -1.646, 1.7035, -0.25, -1.646, 1.7035, -0.25, -1.646, 1.7035, 0.25, -1.7178, 1.5303, 0.25, -0.6357, 1.0821, 0.25, -1.7178, 1.5303, 0.25, -1.646, 1.7035, 0.25, -1.646, 1.7035, 0.25, -0.5031, 1.2147, 0.25, -0.6357, 1.0821, 0.25, -0.6357, -1.0821, -0.25, -1.7178, -1.5303, -0.25, -1.646, -1.7035, -0.25, -1.646, -1.7035, -0.25, -0.5031, -1.2147, -0.25, -0.6357, -1.0821, -0.25, -0.6357, -1.0821, 0.25, -0.5031, -1.2147, 0.25, -1.646, -1.7035, 0.25, -1.646, -1.7035, 0.25, -1.7178, -1.5303, 0.25, -0.6357, -1.0821, 0.25, -1.7178, -1.5303, -0.25, -1.7178, -1.5303, 0.25, -1.646, -1.7035, 0.25, -1.646, -1.7035, 0.25, -1.646, -1.7035, -0.25, -1.7178, -1.5303, -0.25, -0.6357, -1.0821, -0.25, -0.5031, -1.2147, -0.25, 0, 0, -0.25, 0, 0, -0.25, -0.1875, 0, -0.25, -0.6357, -1.0821, -0.25, -0.6357, -1.0821, 0.25, -0.1875, 0, 0.25, 0, 0, 0.25, 0, 0, 0.25, -0.5031, -1.2147, 0.25, -0.6357, -1.0821, 0.25)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xeskc"]
 height = 0.380182
-radius = 1.0
+radius = 1.68487
 
-[node name="Goal" type="Area3D"]
+[node name="Goal" instance=ExtResource("2_sd32o")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(-5.24537e-08, -1.2, 0, 1.2, -5.24537e-08, 0, 0, 0, 1.2, 0, 1, 0)
+shape = SubResource("ConcavePolygonShape3D_vgtdv")
+
+[node name="SM_arc_0" parent="." index="1"]
+transform = Transform3D(-5.24537e-08, -1.2, 0, 1.2, -5.24537e-08, 0, 0, 0, 1.2, 0, 1, 0)
+
+[node name="Goal" type="Area3D" parent="." index="3"]
 script = ExtResource("1_licdd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 0.2, 0, 0, 0, 2, 0, 0, 0)
-mesh = SubResource("CylinderMesh_cjr5w")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Goal" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.79142, 0)
 shape = SubResource("CylinderShape3D_xeskc")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Goal" to="Goal" method="_on_body_entered"]

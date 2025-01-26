@@ -54,10 +54,10 @@ size = Vector3(0.54367, 0.314468, 0.254532)
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("animationPlayer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.85469, 0.0851422, 0.00120044)
 script = ExtResource("1_ot0h5")
-baseSpeed = 2.0
-maxSpeed = 5.0
-chargeDelay = 1.0
-thrustMinDuration = 0.5
+baseSpeed = 2.5
+maxSpeed = 6.0
+chargeDelay = 0.8
+thrustMinDuration = 0.35
 curve = SubResource("Curve_2wgeg")
 freeRotation = 0.01
 limitedRotation = 0.005
