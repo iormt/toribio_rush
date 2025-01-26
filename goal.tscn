@@ -11,6 +11,7 @@ height = 0.380182
 radius = 1.68487
 
 [node name="Goal" instance=ExtResource("2_sd32o")]
+script = ExtResource("1_licdd")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="0"]
 
@@ -22,10 +23,9 @@ shape = SubResource("ConcavePolygonShape3D_vgtdv")
 transform = Transform3D(-5.24537e-08, -1.2, 0, 1.2, -5.24537e-08, 0, 0, 0, 1.2, 0, 1, 0)
 
 [node name="Goal" type="Area3D" parent="." index="3"]
-script = ExtResource("1_licdd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Goal" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.79142, 0)
 shape = SubResource("CylinderShape3D_xeskc")
 
-[connection signal="body_entered" from="Goal" to="Goal" method="_on_body_entered"]
+[connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]

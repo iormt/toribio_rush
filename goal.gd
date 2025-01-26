@@ -1,4 +1,4 @@
-extends Area3D
+extends Node3D
 
 
 @export var score : int = 10
@@ -7,9 +7,9 @@ extends Area3D
 
 
 func _ready() -> void:
-	$"../SM_arc_0".get_active_material(0).albedo_color = color
+	$SM_arc_0.get_active_material(0).albedo_color = color
 
 
-func _on_body_entered(body: Node3D) -> void:
+func _on_goal_body_entered(body: Node3D) -> void:
 	if body.is_in_group("bubbles"):
-		print("Scored ", score, " points!")
+		LoopManager.change_current_points(score)

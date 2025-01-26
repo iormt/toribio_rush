@@ -163,6 +163,6 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		var collision_point = body.global_transform.origin
 		var direction_vector = (collision_point - global_transform.origin).normalized()
 		var hit_direction = Vector3(direction_vector.x, body.global_transform.origin.y, direction_vector.z)
-		bubble.get_hit(currentSpeed / maxSpeed, self.position, direction_vector, currentState == STATE.THRUSTING)
+		bubble.get_hit(currentSpeed / maxSpeed, self.position, hit_direction, currentState == STATE.THRUSTING)
 
 		
