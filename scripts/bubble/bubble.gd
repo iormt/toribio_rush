@@ -4,7 +4,7 @@ class_name Bubble
 @export var speed : float = 250.0
 @export var hitMultiplier = 50;
 var bubble_direction : Vector3
-var pop_sound_array = [$pop_sounds/pop_sound_1, $pop_sounds/pop_sound_2, $pop_sounds/pop_sound_3, $pop_sounds/pop_sound_4, $pop_sounds/pop_sound_5]
+@onready var pop_sound_array = [$pop_sounds/pop_sound_1, $pop_sounds/pop_sound_2, $pop_sounds/pop_sound_3, $pop_sounds/pop_sound_4, $pop_sounds/pop_sound_5]
 var pop_to_play : AudioStreamPlayer3D
 
 enum BubbleStatesEnum {
@@ -51,7 +51,7 @@ func get_hit(value : float, pos : Vector3, direction : Vector3, isThrusting : bo
 	#print("force: ", force, "value: ", value)
 	
 	#hice lo posible para elegir un sonido random y darle play
-	#pop_to_play = pop_sound_array.pick_random() 
-	#pop_to_play.play()
-	$pop_sounds/pop_sound_4.play()
+	pop_to_play = pop_sound_array.pick_random() 
+	pop_to_play.play()
+	#$pop_sounds/pop_sound_4.play()
 	apply_impulse(force)
