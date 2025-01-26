@@ -3,6 +3,7 @@ class_name Bubble
 
 @export var speed : float = 250.0
 
+@export var hitMultiplier = 50;
 
 var bubble_direction : Vector3
 
@@ -38,7 +39,7 @@ func _calculate_hit_force(value : float, position : Vector3, direction : Vector3
 	var dir = self.position - position
 	dir.normalized()
 	var dot = dir.dot(direction)
-	return (dir + Vector3.UP) * dot * value * 50 * (2 if isThrusting else 1)
+	return (dir + Vector3.UP) * dot * value * hitMultiplier * (2 if isThrusting else 1)
 
 func get_hit(value : float, position : Vector3, direction : Vector3, isThrusting : bool) -> void:
 	if value > 0.2:

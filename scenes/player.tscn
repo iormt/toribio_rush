@@ -20,8 +20,8 @@ maxSpeed = 5.0
 chargeDelay = 2.0
 thrustMinDuration = 0.5
 curve = SubResource("Curve_2wgeg")
-freeRotation = 0.005
-limitedRotation = 0.003
+freeRotation = 0.4
+limitedRotation = 0.1
 animationPlayer = NodePath("SK_bull_animations_single/AnimationPlayer")
 
 [node name="SK_bull_animations_single" parent="." instance=ExtResource("2_4784c")]

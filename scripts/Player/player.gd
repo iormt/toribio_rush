@@ -118,7 +118,7 @@ func _move_forward(_delta) :
 	
 	velocity = target_velocity
 	move_and_slide()
-	var kinematicCollision3D : KinematicCollision3D = move_and_collide(target_velocity * _delta)
+	#var kinematicCollision3D : KinematicCollision3D = move_and_collide(target_velocity * _delta)
 	#if (kinematicCollision3D.)
 	
 	pass
