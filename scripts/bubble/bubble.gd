@@ -38,7 +38,8 @@ func _calculate_hit_force(value : float, pos : Vector3, direction : Vector3, isT
 	dir.y = 0
 	dir.normalized()
 	var dot = dir.dot(direction)
-	return (dir) * dot * value * hitMultiplier * (2 if isThrusting else 1)
+	
+	return (dir) * dot * value * hitMultiplier * (5 if isThrusting else 1) + Vector3(0,30,0) #le sumo un vector con fuerza vertical porque siempre daba 0 en Y. Solo para probar
 
 
 func get_hit(value : float, pos : Vector3, direction : Vector3, isThrusting : bool) -> void:

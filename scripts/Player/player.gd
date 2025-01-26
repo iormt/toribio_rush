@@ -116,7 +116,7 @@ func _update_charge_state_and_speed():
 			currentSpeed = maxSpeed
 		else:
 			currentSpeed = baseSpeed + (maxSpeed - baseSpeed) * curve.sample(currentStateTime/chargeDelay)
-			animationPlayer.speed_scale = currentSpeed #acelera animación
+			animationPlayer.speed_scale = currentSpeed  #acelera animación
 			
 		if not Input.is_action_pressed("front"):
 			change_state(STATE.THRUSTING)
@@ -142,7 +142,7 @@ func _move_camera(_delta):
 	var viewport = get_viewport()
 	var mouseX : float = viewport.get_mouse_position().x - (viewport.size.x / 2.0)
 	
-	print("mouseX: ", mouseX, " threshold: ", CAMERA_ROTATION_THRESHOLD)
+	#print("mouseX: ", mouseX, " threshold: ", CAMERA_ROTATION_THRESHOLD)
 	
 	if (mouseX > -CAMERA_ROTATION_THRESHOLD) and (mouseX < CAMERA_ROTATION_THRESHOLD):
 		return
@@ -163,5 +163,5 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		bubble.get_hit(currentSpeed / maxSpeed, self.position, _get_direction(), currentState == STATE.THRUSTING)
 		if (currentState == STATE.THRUSTING):
 			pass
-		print(self.rotation)
+		#print(self.rotation)
 		

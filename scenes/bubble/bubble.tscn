@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://dwyrsetsg206e"]
 
 [ext_resource type="Script" path="res://scripts/bubble/bubble.gd" id="1_diqwf"]
-[ext_resource type="PackedScene" uid="uid://biqf1pl81os4f" path="res://models/people/SK_Character_Dummy_Female_01.fbx" id="2_ksaka"]
+[ext_resource type="PackedScene" uid="uid://cyg5hov36xemo" path="res://models/people/SK_Character_Dummy_Female_01.fbx" id="2_ksaka"]
 [ext_resource type="Script" path="res://scripts/bubble/states/wonder_state.gd" id="2_xq7pr"]
-[ext_resource type="PackedScene" uid="uid://ck0nxjjkxgejt" path="res://models/people/FixedScale/SM_Chr_Attach_Female_Hair_01.fbx" id="3_xht7v"]
+[ext_resource type="PackedScene" uid="uid://bc83urbuh4sdd" path="res://models/people/FixedScale/SM_Chr_Attach_Female_Hair_01.fbx" id="3_xht7v"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_05s0o"]
 friction = 0.5

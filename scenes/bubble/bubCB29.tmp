@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://dwyrsetsg206e"]
+
+[ext_resource type="Script" path="res://scripts/bubble/bubble.gd" id="1_diqwf"]
+[ext_resource type="PackedScene" uid="uid://cyg5hov36xemo" path="res://models/people/SK_Character_Dummy_Female_01.fbx" id="2_ksaka"]
+[ext_resource type="Script" path="res://scripts/bubble/states/wonder_state.gd" id="2_xq7pr"]
+[ext_resource type="PackedScene" uid="uid://bc83urbuh4sdd" path="res://models/people/FixedScale/SM_Chr_Attach_Female_Hair_01.fbx" id="3_xht7v"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_05s0o"]
+friction = 0.5
+bounce = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8tqf"]
+transparency = 1
+albedo_color = Color(6.73831e-07, 0.64636, 0.651192, 0.686275)
+
+[sub_resource type="SphereMesh" id="SphereMesh_es12n"]
+material = SubResource("StandardMaterial3D_s8tqf")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_litif"]
+radius = 0.250039
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hrkoi"]
+height = 0.187443
+radius = 1.71041
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6oh52"]
+height = 0.187443
+radius = 0.4956
+
+[node name="Bubble" type="RigidBody3D" groups=["bubbles"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.155902, 0)
+mass = 7.0
+physics_material_override = SubResource("PhysicsMaterial_05s0o")
+gravity_scale = 0.5
+lock_rotation = true
+script = ExtResource("1_diqwf")
+speed = 85.0
+
+[node name="States" type="Node3D" parent="."]
+
+[node name="WonderState" type="Node3D" parent="States"]
+script = ExtResource("2_xq7pr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_es12n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_litif")
+
+[node name="Dummy_Female_01" parent="." instance=ExtResource("2_ksaka")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.000124961, -0.17256, -0.00760721)
+
+[node name="SM_Chr_Attach_Female_Hair_01" parent="Dummy_Female_01" instance=ExtResource("3_xht7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000756672, 1.61125, 0.0216126)
+
+[node name="BullDetector" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BullDetector"]
+shape = SubResource("CylinderShape3D_hrkoi")
+
+[node name="WallDetector" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallDetector"]
+shape = SubResource("CylinderShape3D_6oh52")
+
+[connection signal="body_entered" from="BullDetector" to="." method="_on_bull_detector_body_entered"]
+[connection signal="body_entered" from="WallDetector" to="." method="_on_wall_detector_body_entered"]
