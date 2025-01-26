@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dwyrsetsg206e"]
 
 [ext_resource type="Script" path="res://scripts/bubble/bubble.gd" id="1_diqwf"]
-[ext_resource type="PackedScene" uid="uid://cyg5hov36xemo" path="res://models/people/SK_Character_Dummy_Female_01.fbx" id="2_ksaka"]
-[ext_resource type="PackedScene" uid="uid://bc83urbuh4sdd" path="res://models/people/FixedScale/SM_Chr_Attach_Female_Hair_01.fbx" id="3_xht7v"]
+[ext_resource type="PackedScene" uid="uid://cmojwhhxlnlsp" path="res://models/people/SK_Character_Dummy_Female_01.fbx" id="2_ksaka"]
+[ext_resource type="PackedScene" uid="uid://d220h4pjkl8uf" path="res://models/people/FixedScale/SM_Chr_Attach_Female_Hair_01.fbx" id="3_xht7v"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_05s0o"]
 friction = 0.75
@@ -20,11 +20,11 @@ radius = 0.250039
 
 [node name="Bubble" type="RigidBody3D" groups=["bubbles"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.155902, 0)
-mass = 70.0
+mass = 7.0
 physics_material_override = SubResource("PhysicsMaterial_05s0o")
 lock_rotation = true
 script = ExtResource("1_diqwf")
-speed = 2000.0
+speed = 500.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

@@ -1,6 +1,10 @@
 extends CharacterBody3D
 
+
 enum STATE { WALKING, CHARGING, THRUSTING}
+
+const CAMERA_ROTATION_THRESHOLD = 10
+const CAMERA_ROTATION_MAX_SPEED_THRESHOLD = 20
 
 @export var baseSpeed : float = 1
 @export var maxSpeed : float = 10
@@ -10,8 +14,8 @@ enum STATE { WALKING, CHARGING, THRUSTING}
 
 @export var curve : Curve
 
-@export var freeRotation : float = 0.04
-@export var limitedRotation : float = 0.01
+@export var freeRotation : float = 4
+@export var limitedRotation : float = 1
 
 @export var animationPlayer : AnimationPlayer
 
@@ -26,6 +30,7 @@ var thrustStartingDirection : Vector3
 var target_rotation = Vector3();
 var target_velocity = Vector3.ZERO
 
+var lastRotationDegrees : float
 
 @onready var camera : Camera3D = $Camera3D
 
@@ -35,6 +40,7 @@ func _ready() -> void:
 func change_state(newState : STATE):
 	if currentState == newState:
 		pass
+	var previousState = currentState
 	currentState = newState
 	
 	var previousStateTime = currentStateTime
@@ -50,6 +56,10 @@ func change_state(newState : STATE):
 			#la velocidad de animación se ajusta en _update_charge_state_and_speed()
 			animationPlayer.get_animation("run").loop_mode = (Animation.LOOP_LINEAR) #pone animacion en loop
 			animationPlayer.play("run")
+			
+			if previousState == STATE.THRUSTING:
+				# Hack to go fast
+				currentStateTime = currentSpeed / maxSpeed
 			pass
 		STATE.THRUSTING:
 			thrustStartingSpeed = currentSpeed
@@ -81,9 +91,9 @@ func _update_rotation():
 	else:
 		return
 		
-	var rotateAmount = _calculate_rotation_by_state()
+	#var rotateAmount = _calculate_rotation_by_state()
 	
-	self.global_rotate(Vector3.UP, rotateAmount * mult)
+	#self.global_rotate(Vector3.UP, rotateAmount * mult)
 	pass
 
 func _is_full_charging() -> bool :
@@ -107,15 +117,15 @@ func _move_forward(_delta) :
 	target_velocity.z = dir.z * currentSpeed
 	
 	velocity = target_velocity
+	move_and_slide()
 	var kinematicCollision3D : KinematicCollision3D = move_and_collide(target_velocity * _delta)
-	
 	#if (kinematicCollision3D.)
 	
 	pass
 
 func _update_charge_state_and_speed():
 	if currentState == STATE.WALKING:
-		if Input.is_action_just_pressed("front"):
+		if Input.is_action_pressed("front"):
 			change_state(STATE.CHARGING)
 	elif currentState == STATE.CHARGING:
 		if _is_full_charging():
@@ -129,6 +139,8 @@ func _update_charge_state_and_speed():
 	elif currentState == STATE.THRUSTING:
 		if currentStateTime >= thrustDuration:
 			change_state(STATE.WALKING)
+		elif Input.is_action_pressed("front"):
+			change_state(STATE.CHARGING)
 		else:
 			currentSpeed = thrustStartingSpeed + (baseSpeed - thrustStartingSpeed) * (currentStateTime/chargeDelay)
 		pass
@@ -142,8 +154,14 @@ func _process(_delta):
 	#if Input.is_action_just_pressed("camera_shake") :
 		#camera.apply_preset_shake(0)
 
+func _move_camera(_delta):
+	var mouseX = get_viewport().get_mouse_position().x
+	#if (mouseX < -THRESHOLD):
+		
+	pass
 func _physics_process(_delta):
 	
+	_move_camera(_delta)
 	_move_forward(_delta)
 	
 	#var targetPosition = to_local(self.global_position) + Vector3(0, 0, currentSpeed)
@@ -153,6 +171,39 @@ func _physics_process(_delta):
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.is_in_group("bubbles") and currentState == STATE.THRUSTING:
-		
+	if body.is_in_group("bubbles"):
+		var bubble : Bubble = body
+		bubble.get_hit(currentSpeed / maxSpeed, self.position, _get_direction(), currentState == STATE.THRUSTING)
+		if (currentState == STATE.THRUSTING):
+			pass
 		print(self.rotation)
+		
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		lastRotationDegrees += event.relative.x;
+		
+		print("lastRotationDegrees: ", lastRotationDegrees)
+		
+		if lastRotationDegrees < - CAMERA_ROTATION_THRESHOLD:
+			var rotationSpeed
+			if (lastRotationDegrees < - CAMERA_ROTATION_MAX_SPEED_THRESHOLD):
+				rotationSpeed = 1
+			else:
+				rotationSpeed = (lastRotationDegrees - CAMERA_ROTATION_THRESHOLD  / (CAMERA_ROTATION_MAX_SPEED_THRESHOLD - CAMERA_ROTATION_THRESHOLD))
+			#self.rotate_y(deg_to_rad(_calculate_rotation_by_state() * rotationSpeed))
+			pass
+		elif lastRotationDegrees > CAMERA_ROTATION_THRESHOLD:
+			var rotationSpeed
+			if (lastRotationDegrees > CAMERA_ROTATION_MAX_SPEED_THRESHOLD):
+				rotationSpeed = 1
+			else:
+				rotationSpeed = (lastRotationDegrees - CAMERA_ROTATION_THRESHOLD  / (CAMERA_ROTATION_MAX_SPEED_THRESHOLD - CAMERA_ROTATION_THRESHOLD))
+			#self.rotate_y(deg_to_rad(_calculate_rotation_by_state() * rotationSpeed))
+			pass
+		else:
+			return
+		#lastRotationDegrees += -event.relative.x * _calculate_rotation_by_state()
+		self.rotate_y(deg_to_rad(-event.screen_relative.x * 0.4))
+		print("time: ", currentStateTime, "relativeX: ", event.relative.x, "screen relative: ", event.screen_relative.x)
+		#self.rotate_x(deg_to_rad(-event.relative.y * mouse_sens))
+		#self.rotation.x = clamp(camera_3d.rotation.x, deg_to_rad(-90), deg_to_rad(90))

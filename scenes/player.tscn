@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://crq2g2b3gl80e" path="res://models/Toro/SK_bull_animations_single.fbx" id="2_4784c"]
 
 [sub_resource type="Curve" id="Curve_2wgeg"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0368421, 0.43956), 0.606168, 0.606168, 0, 0, Vector2(1, 1), 3.005, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 3.005, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_51yf3"]
 
@@ -111,6 +111,9 @@ shape = SubResource("BoxShape3D_8osco")
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 transform = Transform3D(-1.31134e-07, 0.867096, 2.87196, 0, 2.87196, -0.867096, -3, -3.79021e-08, -1.25537e-07, -0.362949, 0.316737, 3.55271e-14)
 spring_length = 0.305
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.252721, 0.0630286, 0)
 
 [connection signal="body_entered" from="SK_bull_animations_single/_Joints/Skeleton3D/BoneAttachment3D/head container/Area3D" to="." method="_on_area_3d_body_entered"]
 
