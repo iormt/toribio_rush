@@ -40,7 +40,6 @@ func set_state(new_state : BubbleState) ->void:
 
 
 func _calculate_hit_force(value : float, pos : Vector3, direction : Vector3, isThrusting : bool) -> Vector3:
-	var returnVector : Vector3
 	var dir = self.position - pos
 	dir.y = 0
 	dir.normalized()

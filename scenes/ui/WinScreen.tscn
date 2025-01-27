@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://c05db8yi36s8a"]
+
+[ext_resource type="Script" path="res://scripts/ui/win_screen.gd" id="1_fqm7f"]
+[ext_resource type="Texture2D" uid="uid://sefipbrmh0lc" path="res://fondo_menu.png" id="2_8wjth"]
+[ext_resource type="Texture2D" uid="uid://b3v6y4pifhj0i" path="res://ui_buttons.png" id="3_lldap"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hv08g"]
+font_size = 72
+font_color = Color(0.580392, 0.286275, 0.227451, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8o3x"]
+atlas = ExtResource("3_lldap")
+region = Rect2(99, 154, 307, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42hoe"]
+atlas = ExtResource("3_lldap")
+region = Rect2(100, 354, 306, 147)
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fqm7f")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_8wjth")
+
+[node name="WinPanel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.296875
+anchor_top = 0.384259
+anchor_right = 0.723959
+anchor_bottom = 0.695988
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WinPanel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -65.5
+offset_right = -22.0
+offset_bottom = 200.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="WinMessageLabel" type="Label" parent="WinPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Player X Wins!"
+label_settings = SubResource("LabelSettings_hv08g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RematchButton" type="Button" parent="WinPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+icon = SubResource("AtlasTexture_p8o3x")
+flat = true
+icon_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="WinPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+icon = SubResource("AtlasTexture_42hoe")
+flat = true
+icon_alignment = 1
+
+[connection signal="button_down" from="WinPanel/VBoxContainer/RematchButton" to="." method="_on_rematch_button_button_down"]
+[connection signal="button_down" from="WinPanel/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_button_down"]

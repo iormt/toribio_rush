@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://m57wcrow0drw"]
+[gd_scene load_steps=9 format=3 uid="uid://cqj3qr1hrn1t0"]
 
-[ext_resource type="Texture2D" uid="uid://blhvbbk4pvhsc" path="res://fondo_menu.png" id="1_f3lg5"]
+[ext_resource type="Texture2D" path="res://fondo_menu.png" id="1_f3lg5"]
 [ext_resource type="Script" path="res://scripts/ui/main_menu_panel_controller.gd" id="1_mn5kh"]
-[ext_resource type="Texture2D" uid="uid://cvllnf385ta4s" path="res://ui_buttons.png" id="2_ddj84"]
-[ext_resource type="FontFile" uid="uid://chtt3c2mdlw2e" path="res://CloisterBlack.ttf" id="3_0gi7u"]
+[ext_resource type="Texture2D" path="res://ui_buttons.png" id="2_ddj84"]
+[ext_resource type="FontFile" path="res://CloisterBlack.ttf" id="3_0gi7u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kqoan"]
 atlas = ExtResource("2_ddj84")
@@ -36,10 +36,8 @@ grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -68.0
-offset_top = -152.0
-offset_right = 1242.0
-offset_bottom = 885.0
+offset_right = 1152.0
+offset_bottom = 648.0
 texture = ExtResource("1_f3lg5")
 
 [node name="MainMenuPanel" type="Panel" parent="."]

@@ -12,12 +12,13 @@ var total_point : int = 240
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_child(timer)
+	timer.connect("timeout", on_timer_end)
 	start_timer()
 	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_timer()
 	on_all_bubbles_in()
 	print(current_points)
@@ -36,8 +37,9 @@ func on_all_bubbles_in():
 func show_win_popup():
 	pass
 	
-func show_loose_popup():
-	pass
+func go_to_win_screen():
+	var error = get_tree().change_scene_to_file("res://scenes/ui/WinScreen.tscn")
+	print(error)
 # ============	UI	================
 
 # ============	TIMER	================
@@ -50,13 +52,15 @@ func update_timer():
 	time_available = timer.time_left
 	minutes = floor( time_available / 60 )
 	seconds = int( time_available ) % 60
-	print(minutes," ",seconds )
-	on_timer_end()
 	return [ minutes , seconds ]
+	
 	
 func on_timer_end():
 	if time_available == 0:
 		timer.stop()
-		show_loose_popup()
-		print("no more time")
+		go_to_win_screen()
 # ============	TIMER	================
+
+
+func reset_points() -> void:
+	current_points = 0
